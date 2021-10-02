@@ -1,4 +1,4 @@
-# AES - encryption
+# AES - file encryption
 
 ### Requirements:
 
@@ -20,7 +20,8 @@ cd learning-encryption-aes
 npm start e [filename.ex]
 ```
 
-A new encrypted file will be created, in the same directory as the original file '-encrypted' will be added before the file extension (filename-encrypted.ex).
+A new encrypted file will be created, in the same directory as the original file. '-encrypted' will be added before the file extension (filename-encrypted.ex). <br />
+Absolute path can be provided for filename.
 
 ### Decrypt
 
@@ -28,7 +29,8 @@ A new encrypted file will be created, in the same directory as the original file
 npm start d [filename-encrypted.ex]
 ```
 
-A new encrypted file will be created, in the same directory as the original file '-decrypted' will be added before the file extension (filename-decrypted.ex).
+A new encrypted file will be created, in the same directory as the original file. '-decrypted' will be added before the file extension (filename-decrypted.ex). <br />
+Absolute path can be provided for filename.
 
 ### Create new key
 
