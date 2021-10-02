@@ -2,12 +2,12 @@ import { encryptFile, decryptFile, createNewKey } from './modules.js';
 
 async function selectModule(selectKey) {
 	switch (selectKey) {
-		case 'createKey':
+		case '-createKey':
 			console.log('Creating new key.');
 			await createNewKey();
 			break;
 
-		case 'encrypt': {
+		case 'e': {
 			console.log('Encrypting file.');
 			const fileName = process.argv[3];
 			console.log('fileName:', fileName);
@@ -15,7 +15,7 @@ async function selectModule(selectKey) {
 			break;
 		}
 
-		case 'decrypt': {
+		case 'd': {
 			console.log('Decrypting file.');
 			const fileName = process.argv[3];
 			console.log('fileName:', fileName);
