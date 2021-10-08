@@ -1,9 +1,10 @@
 import crypto from 'crypto';
-import { loadKey } from './encryptionKey.js';
 import { createIv } from './encryptionIv.js';
+import { generateKeyFromPassword, createSalt } from './keyFromPassword.js';
 
-export async function encrypt(data) {
-	const key = await loadKey();
+export async function encrypt(data, password) {
+	const salt = createSalt();
+	const key = await generateKeyFromPassword(password, salt);
 	const iv = createIv();
 
 	const cipherText = await crypto.webcrypto.subtle.encrypt(

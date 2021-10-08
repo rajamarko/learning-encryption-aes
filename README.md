@@ -12,6 +12,8 @@ npm 7.0.2 or above
 ```
 git clone https://github.com/rajamarko/learning-encryption-aes.git
 cd learning-encryption-aes
+
+npm install
 ```
 
 ### Encrypt:

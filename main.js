@@ -1,6 +1,7 @@
 import { encryptFile, decryptFile, createNewKey } from './modules.js';
+import prompt from 'prompt';
 
-async function selectModule(selectKey) {
+async function selectModule(selectKey, password) {
 	switch (selectKey) {
 		case '-createKey':
 			console.log('Creating new key.');
@@ -11,7 +12,7 @@ async function selectModule(selectKey) {
 			console.log('Encrypting file.');
 			const fileName = process.argv[3];
 			console.log('fileName:', fileName);
-			encryptFile(fileName);
+			encryptFile(fileName, password);
 			break;
 		}
 
@@ -19,7 +20,7 @@ async function selectModule(selectKey) {
 			console.log('Decrypting file.');
 			const fileName = process.argv[3];
 			console.log('fileName:', fileName);
-			decryptFile(fileName);
+			decryptFile(fileName, password);
 			break;
 		}
 
@@ -29,13 +30,33 @@ async function selectModule(selectKey) {
 	}
 }
 
-const main = async () => {
+const main = async (password) => {
 	if (process.versions.node.split('.')[0] < 15) {
 		console.log('Minimum node.js version 15.0.0 is required!');
 		return null;
 	}
 
-	selectModule(process.argv[2]);
+	selectModule(process.argv[2], password);
 };
 
-main();
+const properties = [
+	{
+		name: 'password',
+		hidden: true,
+	},
+];
+
+function onErr(err) {
+	console.log(err);
+	return 1;
+}
+
+prompt.start();
+
+prompt.get(properties, function (err, result) {
+	if (err) {
+		return onErr(err);
+	}
+	// console.log('  Password: ' + result.password);
+	main(result.password);
+});

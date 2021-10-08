@@ -1,9 +1,10 @@
 import crypto from 'crypto';
-import { loadKey } from './encryptionKey.js';
 import { loadIv } from './encryptionIv.js';
+import { generateKeyFromPassword, loadSalt } from './keyFromPassword.js';
 
-export async function decrypt(cipherText) {
-	const key = await loadKey();
+export async function decrypt(cipherText, password) {
+	const salt = await loadSalt();
+	const key = await generateKeyFromPassword(password, salt);
 	const iv = await loadIv();
 
 	try {

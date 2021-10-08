@@ -3,10 +3,15 @@ import { encrypt } from './encryption.js';
 import { decrypt } from './decryption.js';
 import { loadFile, saveFile, changeName, toBuffer } from './fileManipulation.js';
 
-export async function encryptFile(fileName) {
+export async function encryptFile(fileName, password) {
+	if (!password) {
+		console.log('Password is missing.');
+		process.exit();
+	}
+
 	if (fileName) {
 		let file = loadFile(fileName);
-		file = await encrypt(file);
+		file = await encrypt(file, password);
 
 		const newFileName = changeName(fileName, 'encrypted');
 		saveFile(newFileName, toBuffer(file));
@@ -16,10 +21,15 @@ export async function encryptFile(fileName) {
 	console.log('Filename is missing.');
 }
 
-export async function decryptFile(encryptedFileName) {
+export async function decryptFile(encryptedFileName, password) {
+	if (!password) {
+		console.log('Password is missing.');
+		process.exit();
+	}
+
 	if (encryptedFileName) {
 		let encryptedFile = loadFile(encryptedFileName);
-		const decryptedFile = await decrypt(encryptedFile);
+		const decryptedFile = await decrypt(encryptedFile, password);
 
 		const newFileName = changeName(encryptedFileName, 'decrypted');
 		saveFile(newFileName, toBuffer(decryptedFile));
